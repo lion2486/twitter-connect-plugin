@@ -1,7 +1,6 @@
 
 #import <Foundation/Foundation.h>
 #import "TwitterConnect.h"
-#import <Fabric/Fabric.h>
 #import <TwitterKit/TwitterKit.h>
 #import "ListTimelineViewController.h"
 
@@ -12,9 +11,7 @@
     NSString* consumerKey = [self.commandDelegate.settings objectForKey:[@"TwitterConsumerKey" lowercaseString]];
     NSString* consumerSecret = [self.commandDelegate.settings objectForKey:[@"TwitterConsumerSecret" lowercaseString]];
     [[Twitter sharedInstance] startWithConsumerKey:consumerKey consumerSecret:consumerSecret];
-    [Fabric with:@[[Twitter sharedInstance]]];
-    
-    [Fabric with:@[TwitterKit]];
+
 }
 
 
@@ -51,15 +48,15 @@
 
 	NSMutableDictionary *requestParameters = [[NSMutableDictionary alloc] init];
     [requestParameters setObject:[[[Twitter sharedInstance] session] userID] forKey:@"user_id"];
-    
+
     NSString *include_entities = @"false";
-    
+
     if([[command.arguments objectAtIndex:0] objectForKey:@"include_entities"] != nil) {
         if([[[command.arguments objectAtIndex:0] objectForKey:@"include_entities"] boolValue] == YES) {
             include_entities = @"true";
         }
     }
-    
+
     [requestParameters setObject:include_entities forKey:@"include_entities"];
 
 	NSError *error = nil;
@@ -89,13 +86,13 @@
 - (void)verifyCredentials:(CDVInvokedUrlCommand*)command
 {
     TWTRAPIClient *apiClient = [[Twitter sharedInstance] APIClient];
-    
+
     NSMutableDictionary *requestParameters = [[NSMutableDictionary alloc] init];
-    
+
     NSString *include_entities = @"false";
     NSString *skip_status = @"true";
     NSString *include_email = @"true";
-    
+
     if([[command.arguments objectAtIndex:0] objectForKey:@"include_entities"] != nil) {
         if([[[command.arguments objectAtIndex:0] objectForKey:@"include_entities"] boolValue] == YES) {
             include_entities = @"true";
@@ -111,13 +108,13 @@
             include_email = @"false";
         }
     }
-    
+
     [requestParameters setObject:include_entities forKey:@"include_entities"];
     [requestParameters setObject:skip_status forKey:@"skip_status"];
     [requestParameters setObject:include_email forKey:@"include_email"];
-    
+
     NSError *error = nil;
-    
+
     NSURLRequest *apiRequest = [apiClient URLRequestWithMethod:@"GET"
                                                            URL:@"https://api.twitter.com/1.1/account/verify_credentials.json"
                                                     parameters:requestParameters
@@ -126,7 +123,7 @@
                        completion:^(NSURLResponse *response, NSData *data, NSError *error) {
                            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
                            NSInteger _httpStatus = [httpResponse statusCode];
-                           
+
                            CDVPluginResult *pluginResult = nil;
                            NSLog(@"API Response :%@",response);
                            if (error != nil) {
@@ -136,7 +133,7 @@
                                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:resultDict];
                            }
                            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-                           
+
                        }];
 }
 

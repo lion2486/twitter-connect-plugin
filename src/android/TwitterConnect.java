@@ -1,7 +1,5 @@
 package com.manifestwebdesign.twitterconnect;
 
-import io.fabric.sdk.android.Fabric;
-
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -34,7 +32,6 @@ public class TwitterConnect extends CordovaPlugin {
 
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
-		Fabric.with(cordova.getActivity().getApplicationContext(), new Twitter(new TwitterAuthConfig(getTwitterKey(), getTwitterSecret())));
 		Log.v(LOG_TAG, "Initialize TwitterConnect");
 	}
 
@@ -265,7 +262,7 @@ public class TwitterConnect extends CordovaPlugin {
 			}
 		});
 	}
-	
+
 	private JSONObject handleResult(TwitterSession result) {
 		JSONObject response = new JSONObject();
 		try {
@@ -317,7 +314,7 @@ public class TwitterConnect extends CordovaPlugin {
      		System.err.println("Exception: " + e.getMessage());
      		callbackContext.error(e.getMessage());
    		}
-		
+
 	}
 
 }

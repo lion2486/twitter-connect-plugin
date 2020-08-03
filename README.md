@@ -21,7 +21,7 @@ Create a Twitter application and get the consumer key and consumer secret.
 
 Make sure you put in your valid API keys in their respective place.
 
-`cordova plugin add https://github.com/chroa/twitter-connect-plugin --variable FABRIC_KEY=<Fabric API Key> --variable TWITTER_KEY=<Twitter Consumer Key> --variable TWITTER_SECRET=<Twitter Consumer Secret>`
+`cordova plugin add https://github.com/chroa/twitter-connect-plugin --variable TWITTER_KEY=<Twitter Consumer Key> --variable TWITTER_SECRET=<Twitter Consumer Secret>`
 
 For iOS, the deployment target needs to be at least 7.0. You can set this in the config.xml file like so:
 ````
@@ -40,7 +40,6 @@ Add the following to your config:
 
 ```
 <gap:plugin name="twitter-connect-plugin" source="npm" spec="0.5.0">
-  <param name="FABRIC_KEY" value="<Fabric API Key>" />
   <param name="TWITTER_KEY" value="<Twitter Consumer Key>" />
   <param name="TWITTER_SECRET" value="<Twitter Consumer Secret>" />
 </gap:plugin>

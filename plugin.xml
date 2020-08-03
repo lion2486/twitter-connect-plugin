@@ -24,7 +24,6 @@
         <allow-navigation href="about:*" />
     </config-file>
 
-	<preference name="FABRIC_KEY" />
 	<preference name="TWITTER_KEY" />
 	<preference name="TWITTER_SECRET" />
 
@@ -35,10 +34,6 @@
 			<feature name="TwitterConnect">
 				<param name="android-package" value="com.manifestwebdesign.twitterconnect.TwitterConnect" />
 			</feature>
-		</config-file>
-		<config-file target="AndroidManifest.xml" parent="/manifest/application">
-			<meta-data android:name="io.fabric.ApiKey" android:value="$FABRIC_KEY" />
-			<activity android:name="com.manifestwebdesign.twitterconnect.TimelineListActivity" android:label="TimelineListActivity" android:theme="@android:style/Theme.NoTitleBar"></activity>
 		</config-file>
 		<config-file target="res/xml/config.xml" parent="widget">
 			<preference name="TwitterConsumerKey" value="$TWITTER_KEY" />
@@ -71,7 +66,6 @@
 		<header-file src="src/ios/ListTimelineViewController.h" />
 		<source-file src="src/ios/ListTimelineViewController.m" />
 
-		<framework src="src/ios/Fabric.framework" custom="true" />
 		<framework src="src/ios/TwitterKit.framework" custom="true" />
 		<framework src="src/ios/TwitterCore.framework" custom="true" />
 		<resource-file src="src/ios/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle" />
@@ -82,13 +76,5 @@
 		<framework src="Accounts.framework" />
 		<framework src="Social.framework" />
 		<framework src="CoreData.framework" />
-		<config-file target="*-Info.plist" parent="Fabric">
-			<dict>
-				<key>APIKey</key>
-				<string>$FABRIC_KEY</string>
-				<key>Kits</key>
-				<array>$FABRIC_KEY</array>
-			</dict>
-		</config-file>
 	</platform>
 </plugin>
